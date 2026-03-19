@@ -1,42 +1,11 @@
 #ifndef _OSMPENGINE_HPP_
 #define _OSMPENGINE_HPP_
 
-#include <vector>
-#include <string>
+#include "Core/Audio/Audio.hpp"
 #include <memory>
-#include <map>
+#include <string>
 
 namespace OpenSampler {
-
-struct Sample {
-    std::vector<float> data;
-    int sampleRate;
-    int channels;
-    int rootNote;
-    int loVel;
-    int hiVel;
-    int loKey;
-    int hiKey;
-    bool looping;
-    int loopStart;
-    int loopEnd;
-    
-    Sample() : sampleRate(44100), channels(1), rootNote(60), 
-               loVel(0), hiVel(127), loKey(0), hiKey(127),
-               looping(false), loopStart(0), loopEnd(0) {}
-};
-
-struct Voice {
-    int note;
-    int velocity;
-    float phase;
-    float gain;
-    bool active;
-    const Sample* sample;
-    
-    Voice() : note(-1), velocity(0), phase(0.0f), gain(0.0f), 
-              active(false), sample(nullptr) {}
-};
 
 class OSMPEngine {
 public:
@@ -63,15 +32,19 @@ public:
     void SetSustain(float sustain);
     void SetRelease(float release);
     
-    int GetNumVoices() const { return static_cast<int>(mVoices.size()); }
+    float GetAttack() const { return mAttack; }
+    float GetDecay() const { return mDecay; }
+    float GetSustain() const { return mSustain; }
+    float GetRelease() const { return mRelease; }
+    
+    int GetNumVoices() const;
     int GetActiveVoices() const;
-    int GetNumSamples() const { return static_cast<int>(mSamples.size()); }
+    int GetNumSamples() const;
+    
+    Audio::SampleBank* GetSampleBank() { return mSampleBank.get(); }
+    const Audio::SampleBank* GetSampleBank() const { return mSampleBank.get(); }
     
 private:
-    Voice* AllocateVoice(int note, int velocity);
-    const Sample* FindSample(int note, int velocity);
-    void ProcessVoice(Voice& voice, float** outputs, int nFrames, int nChans);
-    
     double mSampleRate;
     int mBlockSize;
     float mMasterVolume;
@@ -81,8 +54,8 @@ private:
     float mSustain;
     float mRelease;
     
-    std::vector<Voice> mVoices;
-    std::vector<std::unique_ptr<Sample>> mSamples;
+    std::unique_ptr<Audio::VoiceManager> mVoiceManager;
+    std::unique_ptr<Audio::SampleBank> mSampleBank;
     
     static constexpr int kMaxVoices = 32;
 };
