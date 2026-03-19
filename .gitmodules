@@ -4,3 +4,15 @@
 [submodule "External/iPlug2"]
 	path = External/iPlug2
 	url = https://github.com/MochiAudio/iPlugBase
+[submodule "External/NeuralAmpModelerCore"]
+	path = External/NeuralAmpModelerCore
+	url = https://github.com/sdatkinson/NeuralAmpModelerCore
+[submodule "External/fluidsynth"]
+	path = External/fluidsynth
+	url = https://github.com/FluidSynth/fluidsynth
+[submodule "External/zynaddsubfx"]
+	path = External/zynaddsubfx
+	url = https://github.com/zynaddsubfx/zynaddsubfx
+[submodule "External/sfizz"]
+	path = External/sfizz
+	url = https://github.com/sfztools/sfizz
