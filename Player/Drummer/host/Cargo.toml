@@ -1,0 +1,28 @@
+[package]
+name = "host"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+osmpcore  = { path = "../crates/osmpcore" }
+anyhow = "1.0.101"
+cpal = { version = "0.17.1" }
+hound = "3.5.1"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+toml = "0.8.23"
+midir = "0.10"
+tokio = { version = "1", features = ["full"] }
+axum = { version = "0.7", features = ["ws"] }
+tower-http = { version = "0.5", features = ["fs", "cors"] }
+futures-util = "0.3"
+open = "5"
+
+[target.'cfg(windows)'.dependencies]
+wasapi = "0.14"
+
+[features]
+default = []
+asio  = ["cpal/asio"]
+jack  = ["cpal/jack"]
+
