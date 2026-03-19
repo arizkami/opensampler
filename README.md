@@ -129,16 +129,16 @@ Available options:
 
 ## Dependencies
 
-- **iPlug2**: Plugin framework (MIT License)
+- **iPlug2**: Plugin framework (ZLib License)
 - **FluidSynth**: SoundFont synthesizer (LGPL)
-- **Sfizz**: SFZ format player (BSD)
+- **Sfizz**: SFZ format player (BSD-2)
 - **ZynAddSubFX**: Software synthesizer (GPL)
 - **Inter Font**: UI typography (OFL)
 - **Lucide Icons**: Icon set (ISC)
 
 ## License
 
-[Specify your license here]
+This Project is MIT License
 
 ## Contributing
 
